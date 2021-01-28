@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Swow me the weather</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
 </head>
 
@@ -14,7 +14,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    Pogoda dla lokalizacji:
+                    What's the weather now?
                 </h1>
             </div>
         </div>
@@ -30,11 +30,14 @@
                                 {{ form.name }}
                             </div>
                             <div class="control">
-                                <button class="submit" class="button is-info">
-                                    Dodaj miasto
+                                <button type="submit" class="button is-info">
+                                    Add City 
                                 </button>
                             </div>
                         </div>
+                        {% if message %}
+                            <div class="notification {{ message_class }}">{{ message }}</div>
+                        {% endif %}
                     </form>
                 </div>
             </div>
@@ -57,12 +60,18 @@
                                     <p>
                                         <span class="title">{{ city_weather.city }}</span>
                                         <br>
-                                        <span class="subtitle">{{ city_weather.temperature }}° C</span>
+                                        <span class="subtitle">{{ city_weather.temp }}° C</span>
                                         <br> {{ city_weather.description }}
                                     </p>
                                 </div>
                             </div>
+                            <div class="media-right">
+                                <a href="{% url 'delete_city' city_weather.city %}">
+                                    <button class="delete"></button>
+                                </a>
+                            </div>
                         </article>
+
                     </div>
                     {% endfor %}
                 </div>
